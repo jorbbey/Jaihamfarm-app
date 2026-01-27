@@ -81,7 +81,6 @@ export default function CreatePost() {
         <FileUpload.Root
           accept={{ "image/*": [] }}
           maxFiles={10}
-          maxSize={5 * 1024 * 1024}
         >
           <FileUpload.HiddenInput />
 

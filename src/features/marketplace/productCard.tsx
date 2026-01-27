@@ -13,6 +13,8 @@ interface ProductCardProps {
     title: string;
     price: number;
     images: string[];
+    profiles: string[];
+    
   }
 }
 
@@ -34,7 +36,7 @@ export default function ProductCard({ product }: ProductCardProps ) {
         </Text>
 
         <Text fontSize="sm" color="gray.500">
-          {product.profiles?.full_name}
+          {product.profiles?.full_name ?? undefined}
         </Text>
 
         <Button size="sm" bg='green.600'>

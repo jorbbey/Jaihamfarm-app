@@ -1,4 +1,4 @@
-import { HStack, NativeSelect, Spacer, Box} from "@chakra-ui/react";
+import { HStack, NativeSelect, Spacer} from "@chakra-ui/react";
 import CreateProductModal from "./createProductModal";
 
 export default function MarketplaceHeader({ onRefresh }: any) {
@@ -9,7 +9,7 @@ export default function MarketplaceHeader({ onRefresh }: any) {
              <option>Newest</option>
              <option>Price: Low to High</option>
              <option>Price: High to Low</option>
-           </NativeSelect.Field>
+           </NativeSelect.Field>P
            <NativeSelect.Indicator />
          </NativeSelect.Root>
 

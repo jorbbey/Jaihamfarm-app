@@ -5,10 +5,10 @@ import GlobalFeed from "../features/feed/globalFeed";
 import RightSidebar from "../features/feed/rightSidebar";
 import NavBar from "../components/common/navbar";
 import Footer from "../components/common/footer";
-import { useFeed } from "../hooks/useFeed";
+// import { useFeed } from "../hooks/useFeed";
 
 export default function FeedPage() {
-  const { refetch } = useFeed();
+  // const { refetch } = useFeed();
 
   return (
     <>
@@ -17,7 +17,8 @@ export default function FeedPage() {
         <Sidebar />
         <Flex justify="space-between" align="flex-start"  my={8} px={6}>
           <GlobalFeed />
-          <RightSidebar onPostCreated={refetch} />
+          {/*<RightSidebar onPostCreated={refetch} />*/}
+           <RightSidebar />
         </Flex>
       </Flex>
 <Footer />

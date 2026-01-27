@@ -31,7 +31,7 @@ function ProfileHeader({ profile }: Props) {
     >
       {/* Avatar */}
       <Avatar.Root size="2xl">
-        <Avatar.Fallback name={profile.full_name} />
+        <Avatar.Fallback name={profile.full_name ?? undefined} />
         <Avatar.Image src={profile.avatar_url ?? undefined} />
       </Avatar.Root>
 

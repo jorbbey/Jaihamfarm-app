@@ -34,7 +34,7 @@ const CATEGORIES = [
 
 function CreateProductModal({ onCreated }: { onCreated: () => void }) {
   const { user } = useUser();
-  const { profile } = useProfile(user?.id);
+  const { profile } = useProfile();
 
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");

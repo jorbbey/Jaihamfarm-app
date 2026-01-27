@@ -79,7 +79,7 @@ function NavBar() {
         <Menu.Root positioning={{ placement: "left-end" }}>
           <Menu.Trigger rounded="full" focusRing="none">
             <Avatar.Root size="lg" ml={4}>
-              <Avatar.Fallback name={profile?.full_name} />
+              <Avatar.Fallback name={profile?.full_name ?? undefined}  />
               <Avatar.Image src={profile?.avatar_url ?? undefined} />
             </Avatar.Root>
           </Menu.Trigger>
