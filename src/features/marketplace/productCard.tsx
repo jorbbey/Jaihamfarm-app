@@ -5,7 +5,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
   product: {
@@ -13,14 +13,24 @@ interface ProductCardProps {
     title: string;
     price: number;
     images: string[];
-    profiles: string[];
-    
-  }
+    profiles: {
+      full_name: string | null;
+    } | null;
+  };
 }
 
-export default function ProductCard({ product }: ProductCardProps ) {
+export default function ProductCard({ product }: ProductCardProps) {
+  const navigate = useNavigate();
+
   return (
-    <Box as={Link} to={`/marketplace/${product.id}`} borderWidth="1px" borderRadius="lg" overflow="hidden">
+    <Box
+      onClick={() => navigate(`/marketplace/${product.id}`)}
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+      cursor="pointer"
+      _hover={{ shadow: "md" }}
+    >
       <Image
         src={product.images?.[0] || "/placeholder.png"}
         alt={product.title}
@@ -31,15 +41,16 @@ export default function ProductCard({ product }: ProductCardProps ) {
 
       <VStack p={4} align="stretch">
         <Text fontWeight="bold">{product.title}</Text>
+
         <Text color="green.600" fontWeight="bold">
           ₦ {product.price.toLocaleString()}
         </Text>
 
         <Text fontSize="sm" color="gray.500">
-          {product.profiles?.full_name ?? undefined}
+          {product.profiles?.full_name ?? ""}
         </Text>
 
-        <Button size="sm" bg='green.600'>
+        <Button size="sm" bg="green.600">
           View Details
         </Button>
       </VStack>

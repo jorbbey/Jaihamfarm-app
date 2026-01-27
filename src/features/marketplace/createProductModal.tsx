@@ -21,6 +21,7 @@ import { HiUpload } from "react-icons/hi";
 import { supabase } from "../../hooks/services/supabase";
 import { useUser } from "../../hooks/useUser";
 import { useProfile } from "../../hooks/useProfile";
+import type { FileChangeDetails } from "@chakra-ui/react";
 
 const CATEGORIES = [
   "Grains",
@@ -184,7 +185,9 @@ function CreateProductModal({ onCreated }: { onCreated: () => void }) {
               <FileUpload.Root
                 maxFiles={5}
                 accept={["image/*"]}
-                onFileChange={(files) => setImageFiles(files)}
+                onFileChange={(details: FileChangeDetails) =>
+                  setImageFiles(details.files)
+                }
               >
                 <FileUpload.HiddenInput />
 
