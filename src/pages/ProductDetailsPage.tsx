@@ -13,8 +13,10 @@ import {
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../hooks/useUser";
 import { useEffect, useState } from "react";
 import { supabase } from "../hooks/services/supabase";
+import { getOrCreateConversation } from "../hooks/useConversation";
 import NavBar from "../components/common/navbar";
 import Footer from "../components/common/footer";
 
@@ -31,6 +33,7 @@ interface Product {
 
 function ProductDetailsPage() {
   const { id } = useParams<{ id: string }>();
+  const { user } = useUser()
   const [product, setProduct] = useState<Product | null>(null);
   const [activeImage, setActiveImage] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -97,6 +100,18 @@ function ProductDetailsPage() {
       JSON.stringify([...existing, product])
     );
   }
+  
+  async function handleMessageSeller() {
+    if (!user || !product) return;
+
+    const conversationId = await getOrCreateConversation({
+      buyerId: user.id,
+      sellerId: product.seller_id,
+      productId: product.id,
+    });
+
+    navigate(`/messages/${conversationId}`);
+  }
 
 
   return (
@@ -152,24 +167,6 @@ function ProductDetailsPage() {
               </Text>
   
               <Text color="gray.700">{product.description}</Text>
-  
-              {/*<Button
-                mt={4}
-                size="lg"
-                bg="#2f8f57"
-                color="white"
-                _hover={{ bg: "#287a4b" }}
-                onClick={() => addToCart(product)}
-              >
-                Add to Cart
-              </Button>
-              
-              <Button
-                 variant="outline"
-                 onClick={() => navigate(`/messages/${product.seller_id}`)}
-               >
-                 Message Seller
-               </Button>*/}
               
               <HStack mt={4} gap={3}>
                 <Button
@@ -185,13 +182,11 @@ function ProductDetailsPage() {
               
                 <Button
                   variant="outline"
-                  onClick={() => navigate(`/messages/${product.seller_id}`)}
+                  onClick={handleMessageSeller}
                 >
                   Message Seller
                 </Button>
               </HStack>
-  
-             
             </VStack>
           </GridItem>
         </Grid>

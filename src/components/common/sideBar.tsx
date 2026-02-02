@@ -5,17 +5,18 @@ import { BsShop } from "react-icons/bs";
 import { PiFarm } from "react-icons/pi";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { FiMessageSquare } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const items = [
-  { icon: TiHomeOutline, label: "Home" },
-  { icon: LuSearch, label: "Discover" },
-  { icon: BsShop, label: "Market" },
-  { icon: PiFarm, label: "My Farm" },
-  { icon: IoMdHeartEmpty, label: "Saved Products" },
-  { icon: FiMessageSquare, label: "Messages" },
+  { icon: TiHomeOutline, label: "Home", link:"/" },
+  { icon: LuSearch, label: "Discover", link:"/feed" },
+  { icon: BsShop, label: "Market", link:"/marketplace" },
+  { icon: PiFarm, label: "My Farm", link:"/my-farm" },
+  { icon: IoMdHeartEmpty, label: "Saved Products",  link:"/saved-products" },
+  { icon: FiMessageSquare, label: "Messages",   link:"/messages"  },
 ];
 
-function Sidebar() {
+function Sidebar({width}: {width?: string}) {
   return (
     <Box
       position="sticky"
@@ -23,7 +24,7 @@ function Sidebar() {
       top={"60px"}
       h="calc(100vh - 60px)"
       overflowY="auto"
-      w="800px"
+      w={width || "220px"}
       p={4}
       borderRight="1px solid"
       borderColor="gray.100"
@@ -34,16 +35,19 @@ function Sidebar() {
     >
       <VStack align="stretch" gap={1} flex={1}>
         {items.map((item) => (
-          <HStack
-            key={item.label}
-            p={3}
-            borderRadius="md"
-            transition="0.2s"
-            _hover={{ bg: "gray.100", cursor: "pointer" }}
-          >
-            <Icon as={item.icon} fontSize="md" />
-            <Text fontWeight="medium">{item.label}</Text>
-          </HStack>
+          <Link to={item.link} key={item.label} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <HStack
+              key={item.label}
+              p={3}
+              borderRadius="md"
+              transition="0.2s"
+              _hover={{ bg: "gray.100", cursor: "pointer" }}
+            >
+              <Icon as={item.icon} fontSize="sm" />
+              <Text fontWeight="medium" fontSize='sm'>{item.label}</Text>
+            </HStack>
+          </Link>
+        
         ))}
       </VStack>
 

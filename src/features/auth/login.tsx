@@ -4,16 +4,28 @@ import { signIn } from "./auth.service";
 import { useNavigate } from "react-router-dom";
 import AuthLayout from "./authLayout";
 
- function Login() {
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false); 
 
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    const { error } = await signIn(email, password);
-    if (error) alert(error.message);
-    navigate("/profile");
+    setLoading(true); 
+    try {
+      const { error } = await signIn(email, password);
+      
+      if (error) {
+        alert(error.message);
+      } else {
+        navigate("/profile");
+      }
+    } catch (err) {
+      alert("An unexpected error occurred");
+    } finally {
+      setLoading(false); 
+    }
   };
 
   return (
@@ -39,11 +51,24 @@ import AuthLayout from "./authLayout";
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button bg='#2f8f57' onClick={handleLogin}>
+        <Button 
+          bg='#2f8f57' 
+          color="white" 
+          _hover={{ bg: '#246d43' }} 
+          onClick={handleLogin} 
+          loading={loading} 
+          loadingText="Signing in"
+        >
           Sign In
         </Button>
 
-        <Button variant="outline" onClick={()=> navigate("/signup")}>Sign Up</Button>
+        <Button 
+          variant="outline" 
+          onClick={() => navigate("/signup")}
+          disabled={loading}
+        >
+          Sign Up
+        </Button>
       </Stack>
     </AuthLayout>
   );

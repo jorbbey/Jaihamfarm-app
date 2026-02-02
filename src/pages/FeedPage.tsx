@@ -14,7 +14,7 @@ export default function FeedPage() {
     <>
       <NavBar />
       <Flex>
-        <Sidebar />
+        <Sidebar width='800px' />
         <Flex justify="space-between" align="flex-start"  my={8} px={6}>
           <GlobalFeed />
           {/*<RightSidebar onPostCreated={refetch} />*/}

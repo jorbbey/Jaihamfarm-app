@@ -90,6 +90,9 @@ function NavBar() {
                 <Menu.Item value="profile" onClick={() => navigate("/profile")}>
                   Profile
                 </Menu.Item>
+                <Menu.Item value="messages" onClick={() => navigate("/messages")}>
+                  Messages
+                </Menu.Item>
                 <Menu.Item value="settings">Settings</Menu.Item>
                 <Menu.Item value="logout" onClick={handleLogout}>
                   Logout

@@ -73,10 +73,10 @@ function Signup() {
           Forgot Password ? {" "}
         </Text>
 
-        <Button bg="#2f8f57" onClick={handleSignup}>
+        <Button bg="#2f8f57" onClick={handleSignup} loading loadingText="Signing Up">
           Sign Up
         </Button>
-        <Button variant="outline" onClick={() => navigate("/login")}>
+        <Button variant="outline" loading loadingText="Signing In" onClick={() => navigate("/login")} >
           Sign in
         </Button>
       </Stack>

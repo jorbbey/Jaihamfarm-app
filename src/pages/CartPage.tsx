@@ -8,14 +8,30 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../hooks/useCart";
+import { useUser } from "../hooks/useUser";
+import { getOrCreateConversation } from "../hooks/useConversation";
 
-export default function CartPage() {
+export default function CartPage({ item }: { item: any }) {
   const { cart, removeFromCart } = useCart();
+  const { user } = useUser()
   const navigate = useNavigate();
 
   if (cart.length === 0) {
     return <Text mt={20} textAlign="center">Your cart is empty</Text>;
   }
+  
+  async function handleMessageSeller() {
+     if (!user) return;
+ 
+     const conversationId = await getOrCreateConversation({
+       buyerId: user.id,
+       sellerId: item.seller_id,
+       productId: item.product_id,
+     });
+ 
+     navigate(`/messages/${conversationId}`);
+   }
+  
 
   return (
     <Box maxW="900px" mx="auto" mt={20} px={4}>
@@ -47,9 +63,7 @@ export default function CartPage() {
               <Button
                 size="sm"
                 variant="outline"
-                onClick={() =>
-                  navigate(`/messages/${product.seller_id}`)
-                }
+                onClick={handleMessageSeller}
               >
                 Message Seller
               </Button>

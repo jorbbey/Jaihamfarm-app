@@ -6,7 +6,9 @@ import EditProfile from "../features/profile/editProfile";
 import FeedPage from "../pages/FeedPage";
 import MarketplacePage from "../pages/MarketplacePage";
 import ProductDetailsPage from "../pages/ProductDetailsPage";
-import CartPage from "../pages/CartPage"
+import CartPage from "../pages/CartPage";
+import MessagesInbox from "../features/chat/messagesInbox";
+import ChatPage from "../pages/ChatPage";
 import ProtectedRoute from "../routes/protectedRoutes";
 import IndexRoute from "./indexRoute";
 
@@ -65,12 +67,30 @@ export default function AppRoutes() {
           </ProtectedRoute>
         }
       />
-      
+
       <Route
         path="/cart"
         element={
           <ProtectedRoute>
             <CartPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/messages"
+        element={
+          <ProtectedRoute>
+            <MessagesInbox />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/messages/:id"
+        element={
+          <ProtectedRoute>
+            <ChatPage />
           </ProtectedRoute>
         }
       />
